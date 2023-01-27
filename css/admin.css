@@ -1,0 +1,192 @@
+/* Author: Lekh Raj Awasthi
+Theme: Mero Bhansa: food order website
+version:1.0 */
+:root{
+    --background: #FFB100;
+
+    --danger: #ef5777;
+    --danger-focus:#f53b57;
+
+    --primary: #0be881;
+    --primary-focus: #05c46b;
+
+    --secondary: #575fcf;
+    --secondary-focus:#3c40c6;
+
+}
+
+*{
+    margin:0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    /* border: 1px solid red; */
+
+}
+.wrapper{
+    /* border: 1px solid black; */
+    padding: 1%;
+    width: 80%;
+    margin: 0 auto; 
+
+}
+.text-center{
+    text-align: center;
+}
+.clearfix{
+    float: none;
+    clear: both;
+}
+
+/* css for menu */
+.menu{
+    border-bottom: 1px solid black;
+    margin-bottom: 2%;
+}
+.menu ul{
+    list-style-type: none;
+}
+.menu ul li{
+    display: inline;
+    padding: 1%;
+}
+.menu ul li a{
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--background);
+}
+.menu ul li a:hover{
+    color:#ADE792;
+}
+/* Css for main content */
+.main-content{
+    padding: 3% 0;
+    background-color: #FFFBF5;
+}
+
+.col-4{
+    width: 19%;
+    background-color: white;
+    margin: 1%;
+    padding: 2%;
+    float: left;
+}
+/* footer css */
+.footer{
+    margin-top: 3%;
+    padding: 1%;
+    background-color: var(--background);
+    color: white;
+    width: 100%;
+
+
+}
+
+/* admin page table css */
+.tbl-full{
+    width:100%;
+}
+table tr th{
+    border-bottom: 1px solid black;
+    padding: 1%;
+    text-align: left;
+}
+table tr td{
+    padding: 1%;
+}
+.btn-primary{
+    background-color: var(--primary);
+    color:black;
+    padding:1%;
+    text-decoration: none;
+    font-weight: bold;
+}
+.btn-danger{
+    background-color: var(--danger);
+    color:white;
+    padding:1%;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+.btn-primary:hover{
+    background-color: var(--primary-focus);
+    color: white;
+}
+.btn-danger:hover{
+    background-color: var(--danger-focus);
+}
+.btn-secondary{
+    background-color: var(--secondary);
+    color:white;
+    padding:1%;
+    text-decoration: none;
+    font-weight: bold;
+}
+.btn-secondary:hover{
+    background-color: var(--secondary-focus);
+
+}
+
+      /* Styling  for add admin*/
+body {
+background-color: #f2f2f2;
+font-family: Arial, sans-serif;
+}
+.add-admin {
+max-width: 600px;
+margin: 0 auto;
+background-color: #fff;
+padding: 16px;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.add-admin h2 {
+text-align: center;
+margin-bottom: 32px;
+}
+.add-admin form {
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+}
+.add-admin label {
+width: 100%;
+text-align: left;
+margin-bottom: 8px;
+font-weight: bold;
+}
+.add-admin input[type="text"], input[type="email"], input[type="password"] {
+width: 100%;
+padding: 12px;
+margin-bottom: 16px;
+box-sizing: border-box;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+.add-admin input[type="submit"] {
+width: 100%;
+padding: 12px;
+background-color: #4CAF50;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+.add-admin input[type="submit"]:hover {
+background-color: #45a049;
+}
+/* Responsive CSS */
+@media (max-width: 600px) {
+.add-admin {
+    width: 100%;
+    padding: 0 16px;
+}
+}
+#add {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
