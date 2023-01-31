@@ -1,6 +1,7 @@
 <?php
      include('../config/constants.inc.php'); 
      include('../config/functions.inc.php');
+     include('login-check.inc.php')
 ?>
 
 <html>
@@ -8,7 +9,7 @@
         <title>Food Order Website - Home page</title>
         <link rel="stylesheet" href="../css/admin.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-
+        <!-- <script src="../scripts/script.js"></script> -->
     </head>
     <body>
 
@@ -24,6 +25,14 @@
                     <li><a href="manage-category.php">Category</a></li>
                     <li><a href="manage-food.php">Food</a></li>
                     <li><a href="manage-order.php">Order</a></li>
+                    <li><a href="logout.php">Logout</a>
+                <?php
+                    if(isset($_SESSION['full_name']))
+                    {
+                        echo $_SESSION['full_name'];
+                    }    
+                ?>
+                </li>
                 </ul>
             </div>
         </div>
