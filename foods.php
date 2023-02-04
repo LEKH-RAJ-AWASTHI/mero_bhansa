@@ -1,10 +1,10 @@
     
     <?php include('partials/menu.inc.php'); ?>
 <!-- fOOD sEARCH Section Starts Here -->
-    <section class="food-search text-center">
+<section class="food-search text-center">
         <div class="container">
             
-            <form action="food-search.html" method="POST">
+            <form action="<?php echo SITEURL;?>food-search.php" method="POST">
                 <input type="search" name="search" placeholder="Search for Food.." required>
                 <input type="submit" name="submit" value="Search" class="btn btn-primary">
             </form>
@@ -65,7 +65,7 @@
                                     </p>
                                     <br>
 
-                                    <a href="<?php echo SITEURL; ?>order.php" class="btn btn-primary">Order Now</a>
+                                    <a href="<?php echo SITEURL; ?>order.php?id=<?php echo $id;?>&image_name=<?php echo $image_name; ?>" class="btn btn-primary">Order Now</a>
                                 </div>
                             </div>
                             <?php
