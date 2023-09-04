@@ -39,7 +39,7 @@
       <input type="number" id="price" name="price" placeholder="Enter food price" ><br><br>
       
       <label for="image">Select Image:</label>
-      <input type="file" id="title" name="image" accept="image/*"><br><br>
+      <input type="file" id="" name="image" accept="image/*"><br><br>
       
       <label for="category">Category</label>
       <select name="category">

@@ -1,5 +1,5 @@
 <?php include('partials/menu.inc.php'); 
-    $search=$_POST['search'];
+    $search=get_safe_value($con,$_POST['search']);
 ?>
 
     <!-- fOOD sEARCH Section Starts Here -->

@@ -10,31 +10,58 @@ include("partials/menu.inc.php");
 
                 <div class="col-4 text-center">
                     <h1>
-                        5
+                        <?php 
+                        $sql= "SELECT id FROM tbl_category";
+                        $res=mysqli_query($con, $sql);
+                        // pr($res);
+                        $count=mysqli_num_rows($res);
+                        echo $count;
+                        ?>
                     </h1>
                     <br>
                     Categories
                 </div>
                 <div class="col-4 text-center">
                     <h1>
-                        5
+                        <?php 
+                            $sql= "SELECT id FROM tbl_food";
+                            $res=mysqli_query($con, $sql);
+                            // pr($res);
+                            $count=mysqli_num_rows($res);
+                            echo $count;
+                        ?>
                     </h1>
                     <br>
-                    Categories
+                    Foods
                 </div>
                 <div class="col-4 text-center">
                     <h1>
-                        5
+                        <?php 
+                            $sql= "SELECT id FROM tbl_order";
+                            $res=mysqli_query($con, $sql);
+                            // pr($res);
+                            $count=mysqli_num_rows($res);
+                            echo $count;
+                        ?>
                     </h1>
                     <br>
-                    Categories
+                    Orders
                 </div>
                 <div class="col-4 text-center">
                     <h1>
-                        5
+                        <?php 
+                            $sql= "SELECT sum(total) AS Total FROM tbl_order WHERE status='Delivered'";
+                            $res=mysqli_query($con, $sql);
+                            // pr($res);
+                            $row=mysqli_fetch_assoc($res);
+                            $revenue= $row['Total'];
+                            echo "Rs. $revenue";
+                            // $count=mysqli_num_rows($res);
+                            // echo $count;
+                        ?>
                     </h1>
                     <br>
-                    Categories
+                    Revenue
                 </div>
 
                 <div class="clearfix"></div>

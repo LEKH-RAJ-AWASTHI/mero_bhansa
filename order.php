@@ -1,45 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <!-- Important to make website responsive -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Website</title>
+<?php include('partials/menu.inc.php'); ?>
 
-    <!-- Link our CSS file -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<?php
+    if(isset($_GET['id']))
+    {
+        $id=$_GET['id'];
+        //sql
 
-<body>
-    <!-- Navbar Section Starts Here -->
-    <section class="navbar">
-        <div class="container">
-            <div class="logo">
-                <a href="#" title="Logo">
-                    <img src="images/logo.png" alt="Restaurant Logo" class="img-responsive">
-                </a>
-            </div>
+        $sql="SELECT * FROM tbl_food WHERE id='$id'";
+        $res=mysqli_query($con, $sql);
+        $count=mysqli_num_rows($res);
+        if($count)
+        {
+            $row=mysqli_fetch_assoc($res);
 
-            <div class="menu text-right">
-                <ul>
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="categories.html">Categories</a>
-                    </li>
-                    <li>
-                        <a href="foods.html">Foods</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
 
-            <div class="clearfix"></div>
-        </div>
-    </section>
+            $title=$row['title'];
+            $price=$row['price'];
+            $description=$row['description'];
+            $image_name=$row['image_name'];
+
+        }
+        else
+        {
+            header('location:'.SITEURL);
+        }
+
+    }
+    else
+    {
+        header('location:'.SITEURL);
+    }
+    ?>
     <!-- Navbar Section Ends Here -->
 
     <!-- fOOD sEARCH Section Starts Here -->
@@ -48,17 +39,34 @@
             
             <h2 class="text-center text-white">Fill this form to confirm your order.</h2>
 
-            <form action="#" class="order">
+            <form action="" method="post" class="order">
                 <fieldset>
                     <legend>Selected Food</legend>
 
                     <div class="food-menu-img">
-                        <img src="images/menu-pizza.jpg" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                    <?php
+
+                        // if image is availabe only then we are displaying the image
+                        if($image_name=='')
+                        {
+                            echo '<p style="color: red">Sorry, Image not available</p>';
+                        }
+                        else
+                        {
+                            ?>
+                            <img src="<?php echo SITEURL;?>images/food/<?php echo $image_name;?>" alt="<?php echo $title; ?>" class="img-responsive img-curve">
+                            
+                            <?php
+
+                        }
+                        ?>
                     </div>
     
                     <div class="food-menu-desc">
-                        <h3>Food Title</h3>
-                        <p class="food-price">$2.3</p>
+                        <h3><?php echo $title;?></h3>
+                        <p class="food-price"><?php echo 'Rs. '.$price;?></p>
+                        <input type="hidden" name="title" value="<?php echo $title; ?>">
+                        <input type="hidden" name="price" value="<?php echo $price; ?>">
 
                         <div class="order-label">Quantity</div>
                         <input type="number" name="qty" class="input-responsive" value="1" required>
@@ -70,51 +78,81 @@
                 <fieldset>
                     <legend>Delivery Details</legend>
                     <div class="order-label">Full Name</div>
-                    <input type="text" name="full-name" placeholder="E.g. Vijay Thapa" class="input-responsive" required>
+                    <input type="text" name="full-name" placeholder="Enter Your name" class="input-responsive" required>
 
                     <div class="order-label">Phone Number</div>
-                    <input type="tel" name="contact" placeholder="E.g. 9843xxxxxx" class="input-responsive" required>
+                    <input type="tel" name="contact" placeholder="E.g. 98xxxxxxxx" class="input-responsive" required>
 
                     <div class="order-label">Email</div>
-                    <input type="email" name="email" placeholder="E.g. hi@vijaythapa.com" class="input-responsive" required>
+                    <input type="email" name="email" placeholder="E.g. someone@example.com" class="input-responsive" required>
 
                     <div class="order-label">Address</div>
-                    <textarea name="address" rows="10" placeholder="E.g. Street, City, Country" class="input-responsive" required></textarea>
+                    <textarea name="address" rows="10" placeholder="E.g. Street, City" class="input-responsive" required></textarea>
+                    <input type="hidden" name="title" value="<?php echo $title; ?>">
+                    <input type="hidden" name="price" value="<?php echo $price; ?>">
 
                     <input type="submit" name="submit" value="Confirm Order" class="btn btn-primary">
                 </fieldset>
 
             </form>
+            
+            <?php
+                if(isset($_POST['submit']))
+                {
+                    $food_title=get_safe_value($con, $_POST['title']);
+                    $price=get_safe_value($con, $_POST['price']);
+                    $qty=get_safe_value($con, $_POST['qty']);
+                    $total=$price * $qty;
+                    $order_date=date("Y-m-d h:i:sa");
+                    $status="Ordered"; //parameters will be ordered, on-delivery, delivered, cancelled. When the submit button is clicked the status will be ordered but other status are maintained by the admin.
+
+                    $customer_name=get_safe_value($con, $_POST['full-name']);
+                    $customer_contact=get_safe_value($con, $_POST['contact']);
+                    $customer_email=get_safe_value($con, $_POST['email']);
+                    $customer_address=get_safe_value($con, $_POST['address']);
+
+                    //sql
+                    $sql2="INSERT INTO tbl_order SET
+                            food='$food_title',
+                            price='$price',
+                            qty='$qty',
+                            total='$total',
+                            order_date='$order_date',
+                            status='$status',
+                            customer_name='$customer_name',
+                            customer_contact='$customer_contact',
+                            customer_email='$customer_email',
+                            customer_address='$customer_address'
+                    ";
+                    
+                    $res2=mysqli_query($con, $sql2);
+                    
+                    if($res2)
+                    {
+                        $_SESSION['order']='
+
+                        <h3 id="add" style="color: green;">
+                            Order placed Successfully.
+                        </h3>
+                      ';
+                      header('location:'.SITEURL);
+                    }
+                    else
+                    {
+                        //failed to execute query
+                        $_SESSION['order']='<h3 id="add" style="color: red; text-align: center; width: full;">
+                                                Placing Order unsuccessfull.
+                                            </h3>';
+                    header('location:'.SITEURL);
+
+                    }
+
+                }
+            ?>
 
         </div>
     </section>
     <!-- fOOD sEARCH Section Ends Here -->
 
     <!-- social Section Starts Here -->
-    <section class="social">
-        <div class="container text-center">
-            <ul>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/50/000000/facebook-new.png"/></a>
-                </li>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/></a>
-                </li>
-                <li>
-                    <a href="#"><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/></a>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <!-- social Section Ends Here -->
-
-    <!-- footer Section Starts Here -->
-    <section class="footer">
-        <div class="container text-center">
-            <p>All rights reserved. Designed By <a href="#">Vijay Thapa</a></p>
-        </div>
-    </section>
-    <!-- footer Section Ends Here -->
-
-</body>
-</html>
+    <?php include('partials/footer.inc.php'); ?>

@@ -2,7 +2,13 @@
     <?php include('partials/menu.inc.php'); ?>
 
     <!-- Navbar Section Ends Here -->
-
+    <?php
+    if(isset($_SESSION['order']))
+    {
+        echo $_SESSION['order'];
+        unset($_SESSION['order']);
+    }
+    ?>
     <!-- fOOD sEARCH Section Starts Here -->
     <section class="food-search text-center">
         <div class="container">
@@ -172,7 +178,7 @@
         </div>
 
         <p class="text-center">
-            <a href="#">See All Foods</a>
+            <a href="<?php echo SITEURL; ?>foods.php">See All Foods</a>
         </p>
     </section>
     <!-- fOOD Menu Section Ends Here -->

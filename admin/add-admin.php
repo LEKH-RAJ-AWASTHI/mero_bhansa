@@ -73,7 +73,7 @@
       {
         $sql="INSERT INTO tbl_admin (full_name, username, password) VALUES('$full_name','$username', '$password')";
 
-        $res= mysqli_query($con, $sql) or die(mysqli_error());
+        $res= mysqli_query($con, $sql) or die(mysqli_error($con));
       
     
         if ($res) {

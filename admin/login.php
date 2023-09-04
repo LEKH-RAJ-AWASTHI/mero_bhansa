@@ -48,7 +48,7 @@
     if(isset($_POST['submit']))
     {
         $username=get_safe_value($con, $_POST['username']);
-        $password=md5(get_safe_value($con,$_POST['password']));
+        $password=get_safe_value($con,(md5($_POST['password'])));
 
         // echo "$username, $password";
         //sql to check the username and password in database

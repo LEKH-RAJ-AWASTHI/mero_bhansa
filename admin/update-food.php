@@ -64,8 +64,7 @@
     ?>
     <!-- form for updation of foods -->
     <form action="" method="post" enctype="multipart/form-data">
-      <label for="title">Food Title:</label>
-      <input type="text" id="title" name="title" value="<?php echo $title;?>" placeholder="Enter food title" ><br><br>
+       <input type="text" id="title" name="title" value="<?php echo $title;?>" placeholder="Enter food title" ><br><br>
       
       <label for="desc">Food Description:</label>
       <textarea name="description" rows="5" cols="10" placeholder="Enter Description"><?php echo $description; ?></textarea>      
@@ -242,12 +241,12 @@
         
         else
         {
-            $form_image_name=$curr_image;
+            $form_image_name=$curr_image; // when button is clicked but image is not selected
         }
     }
     else
     {
-        $form_image_name=$curr_image;
+        $form_image_name=$curr_image; //when button is clicked
     }
 
 
